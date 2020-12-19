@@ -16,14 +16,18 @@
               </div>
               <div class="main-container">
                 <div class="item-container">
-                  <div v-for="item in brands" :key="item" class="item-text">
+                  <div
+                    v-for="(item, idx) in brands"
+                    :key="idx"
+                    class="item-text"
+                  >
                     <div class="content">
                       {{ item.nome }}
                     </div>
                   </div>
                 </div>
                 <div class="item-container">
-                  <div v-for="item in brands" :key="item" class="item-text">
+                  <div v-for="(item, i) in brands" :key="i" class="item-text">
                     <button
                       class="button-model"
                       :class="{ changeColor: item.codigo === codigo }"
@@ -55,7 +59,11 @@
               </div>
               <div class="main-container">
                 <div class="item-container">
-                  <div v-for="item in models" :key="item" class="item-text">
+                  <div
+                    v-for="(item, indx) in models"
+                    :key="indx"
+                    class="item-text"
+                  >
                     <div class="content">
                       {{ item }}
                     </div>
@@ -102,7 +110,8 @@ export default {
       this.codigo = codigo
       axios
         .get(
-          `https://parallelum.com.br/fipe/api/v1/carros/marcas/${codigo}/modelos`
+          `https://parallelum.com.br/fipe/api/v1/carros/marcas/${codigo}/modelos`,
+          { progress: false }
         )
         .then((res) => {
           const modelsList = res.data.modelos.map((cod) => cod.nome)
@@ -227,7 +236,6 @@ button {
 .brand-container {
   background-color: #ffffff;
   color: #5a5c69;
-  /* height: 300px; */
 }
 .brand-header span {
   font-size: 0.9em;

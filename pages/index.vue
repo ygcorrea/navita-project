@@ -7,7 +7,24 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {}
+  },
+  head() {
+    return {
+      title: 'Navita',
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href:
+            'https://navita.com.br/wp-content/uploads/2018/06/navita-favicon.png',
+        },
+      ],
+    }
+  },
+}
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
