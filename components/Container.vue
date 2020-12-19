@@ -26,13 +26,15 @@
                   <div v-for="item in brands" :key="item" class="item-text">
                     <button
                       class="button-model"
-                      :class="{ changeColor: changeC }"
+                      :class="{ changeColor: item.codigo === codigo }"
                       @click="
-                        getModel(item.codigo)
-                        showModels()
+                        showModelsAndGetModel(
+                          item.codigo === codigo,
+                          item.codigo
+                        )
                       "
                     >
-                      Ver modelos
+                      Ver Modelos
                     </button>
                   </div>
                 </div>
@@ -77,7 +79,7 @@ export default {
       brands: [],
       clicked: false,
       models: [],
-      codigo: null,
+      codigo: 0,
     }
   },
   created() {
@@ -92,7 +94,12 @@ export default {
       this.clicked = true
       this.changeC = true
     },
+    hideModels() {
+      this.clicked = false
+      this.changeC = false
+    },
     getModel(codigo) {
+      this.codigo = codigo
       axios
         .get(
           `https://parallelum.com.br/fipe/api/v1/carros/marcas/${codigo}/modelos`
@@ -102,6 +109,15 @@ export default {
 
           this.models = modelsList
         })
+    },
+    showModelsAndGetModel(currentCodigo, itemCodigo) {
+      if (currentCodigo) {
+        this.codigo = 0
+        this.hideModels()
+      } else {
+        this.getModel(itemCodigo)
+        this.showModels()
+      }
     },
   },
 }
