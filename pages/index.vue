@@ -39,8 +39,6 @@ body {
   flex-direction: column;
 }
 
-/* .header-style {
-} */
 .container-style {
   flex: 3;
 }
