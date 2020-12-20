@@ -23,5 +23,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 50px;
+  font-size: 0.7em;
+  color: #5a5c69;
 }
 </style>
