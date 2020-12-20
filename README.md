@@ -7,7 +7,7 @@ Link para a documentação da API: https://deividfortuna.github.io/fipe/
 
 
 > **Preview:**
-> Deploy: 👉 [Navita Project](navita-ygcorrea.netlify.app)
+> Deploy: 👉 https://navita-challenge-ygcorrea.netlify.app
 
 ## Comportamento da tela:
 Desenvolver uma tabela que liste todas as marcas de veículos disponíveis na API, exibindo o nome
