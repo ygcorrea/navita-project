@@ -59,7 +59,14 @@
               </div>
               <div class="main-container">
                 <div class="item-container">
+                  <div class="lds-ellipsis" v-if="loading">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
                   <div
+                    v-else
                     v-for="(item, indx) in models"
                     :key="indx"
                     class="item-text"
@@ -88,6 +95,7 @@ export default {
       clicked: false,
       models: [],
       codigo: 0,
+      loading: false,
     }
   },
   created() {
@@ -108,6 +116,7 @@ export default {
     },
     getModel(codigo) {
       this.codigo = codigo
+      this.loading = true
       axios
         .get(
           `https://parallelum.com.br/fipe/api/v1/carros/marcas/${codigo}/modelos`,
@@ -118,6 +127,7 @@ export default {
 
           this.models = modelsList
         })
+        .finally(() => (this.loading = false))
     },
     showModelsAndGetModel(currentCodigo, itemCodigo) {
       if (currentCodigo) {
@@ -240,5 +250,63 @@ button {
 .brand-header span {
   font-size: 0.9em;
   margin-left: 14px;
+}
+/* loader <3 */
+.lds-ellipsis {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+  left: 590px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 27px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #1cc88a;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 10px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 10px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 30px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 50px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(19px, 0);
+  }
 }
 </style>
